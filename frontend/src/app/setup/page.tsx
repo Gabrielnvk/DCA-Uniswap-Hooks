@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useAccount } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { parseUnits, formatUnits } from "viem";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowDown, Wallet, Loader2, ExternalLink, Check } from "lucide-react";
+import { ArrowDown, Wallet, Loader2, ExternalLink, Check, Repeat } from "lucide-react";
 import { useCreateDCA, useApproveToken } from "@/hooks/use-dca-write";
 import { DCA_HOOK_ADDRESS, INTERVALS, txUrl } from "@/lib/contracts";
 
@@ -73,6 +74,25 @@ export default function SetupPage() {
         </p>
       </div>
 
+      {/* Connect Wallet Gate */}
+      {!isConnected && (
+        <Card className="border-primary/20">
+          <CardContent className="py-12">
+            <div className="flex flex-col items-center justify-center text-center">
+              <div className="h-16 w-16 rounded-full bg-primary/5 flex items-center justify-center mb-4">
+                <Repeat className="h-8 w-8 text-primary/30" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Connect your wallet</h3>
+              <p className="text-muted-foreground text-sm mb-6 max-w-sm">
+                Connect your wallet to start setting up automated DCA positions on Base
+              </p>
+              <ConnectButton />
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {isConnected && (<>
       {/* Token Select Modal */}
       {showTokenSelect && (
         <Card className="border-primary/30">
@@ -295,6 +315,7 @@ export default function SetupPage() {
           </>
         )}
       </div>
+      </>)}
     </div>
   );
 }
