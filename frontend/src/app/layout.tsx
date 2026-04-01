@@ -35,11 +35,15 @@ export default function RootLayout({
           <SidebarProvider>
             <div className="flex min-h-screen w-full">
               <AppSidebar />
-              <main className="flex-1 p-6">
-                <div className="mb-4">
-                  <SidebarTrigger />
+              <main className="flex-1 p-8">
+                <div className="mb-6 flex items-center gap-4">
+                  <SidebarTrigger className="text-muted-foreground hover:text-primary transition-colors" />
+                  <div className="h-4 w-px bg-border" />
+                  <span className="text-xs text-muted-foreground font-mono">Base Mainnet</span>
                 </div>
-                {children}
+                <div className="max-w-6xl">
+                  {children}
+                </div>
               </main>
             </div>
           </SidebarProvider>

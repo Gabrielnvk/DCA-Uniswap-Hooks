@@ -96,7 +96,7 @@ export default function SetupPage() {
         </Card>
       )}
 
-      <Card>
+      <Card className="card-hover">
         <CardHeader>
           <CardTitle>Token Pair</CardTitle>
           <CardDescription>Select the tokens to swap</CardDescription>
@@ -152,7 +152,7 @@ export default function SetupPage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="card-hover">
         <CardHeader>
           <CardTitle>Schedule</CardTitle>
           <CardDescription>How often and how many times to execute</CardDescription>
@@ -188,7 +188,7 @@ export default function SetupPage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="card-hover border-primary/10">
         <CardHeader>
           <CardTitle>Summary</CardTitle>
         </CardHeader>
@@ -239,15 +239,16 @@ export default function SetupPage() {
         </div>
       )}
 
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         {!isConnected ? (
-          <Button className="flex-1" size="lg" disabled>
+          <Button className="flex-1 h-12 text-base" size="lg" disabled>
             Connect Wallet First
           </Button>
         ) : (
           <>
             <Button
-              className="flex-1"
+              className="flex-1 h-12 text-base transition-all duration-200"
+              variant={isApproved ? "outline" : "default"}
               size="lg"
               onClick={handleApprove}
               disabled={!tokenIn || !amount || !numSwaps || isApproving || isApproveConfirming || isApproved}
@@ -257,11 +258,11 @@ export default function SetupPage() {
               ) : isApproved ? (
                 <><Check className="h-4 w-4 mr-2" />Approved</>
               ) : (
-                "Approve Token"
+                <>1. Approve Token</>
               )}
             </Button>
             <Button
-              className="flex-1"
+              className={`flex-1 h-12 text-base transition-all duration-200 ${isApproved && !isCreated ? "btn-glow" : ""}`}
               size="lg"
               disabled={!isApproved || isCreating || isCreateConfirming}
               onClick={() => {
@@ -288,7 +289,7 @@ export default function SetupPage() {
               ) : isCreated ? (
                 <><Check className="h-4 w-4 mr-2" />Created!</>
               ) : (
-                "Create DCA"
+                <>2. Create DCA</>
               )}
             </Button>
           </>

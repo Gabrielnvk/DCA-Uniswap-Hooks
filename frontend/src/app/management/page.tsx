@@ -37,7 +37,7 @@ function OrderCard({ order }: { order: DCAOrder }) {
   const tokenOutLabel = order.tokenOut.slice(0, 6) + "..." + order.tokenOut.slice(-4);
 
   return (
-    <Card>
+    <Card className="card-hover">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="text-base font-mono">
