@@ -1,15 +1,22 @@
 "use client";
 
-import { getDefaultConfig, RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
+import { RainbowKitProvider, darkTheme, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { WagmiProvider, createConfig, http } from "wagmi";
 import { base } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { coinbaseWallet, injected, metaMask } from "wagmi/connectors";
 import "@rainbow-me/rainbowkit/styles.css";
 
-const config = getDefaultConfig({
-  appName: "DCA Uniswap Hooks",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo",
+const config = createConfig({
   chains: [base],
+  connectors: [
+    injected(),
+    metaMask(),
+    coinbaseWallet({ appName: "DCA Uniswap Hooks" }),
+  ],
+  transports: {
+    [base.id]: http(),
+  },
   ssr: true,
 });
 
